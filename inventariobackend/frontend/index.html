@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Inventario</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    h2 { color: #333; }
+    section { margin-bottom: 40px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+    th { background: #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Dashboard de Inventario</h1>
+
+  <section>
+    <h2>Ventas por Tienda</h2>
+    <table id="ventasTienda">
+      <thead>
+        <tr><th>Tienda</th><th>Total Vendido</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Top Productos Vendidos</h2>
+    <table id="topProductos">
+      <thead>
+        <tr><th>Producto</th><th>Total Vendido</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Reabastecimiento por Proveedor</h2>
+    <table id="reabastecimientoProveedor">
+      <thead>
+        <tr><th>Proveedor</th><th>Total Reabastecido</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <script>
+    const fetchAndRender = (endpoint, tableId, keys) => {
+      fetch(`http://127.0.0.1:8000/api/analytics/${endpoint}/`)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector(`#${tableId} tbody`);
+          data.forEach(row => {
+            const tr = document.createElement("tr");
+            keys.forEach(k => {
+              const td = document.createElement("td");
+              td.textContent = row[k];
+              tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+          });
+        })
+        .catch(err => console.error(`Error en ${endpoint}:`, err));
+    };
+
+    fetchAndRender("ventas-por-tienda", "ventasTienda", ["tienda", "total_vendido"]);
+    fetchAndRender("top-productos", "topProductos", ["producto", "total_vendido"]);
+    fetchAndRender("reabastecimiento-proveedor", "reabastecimientoProveedor", ["proveedor", "total_reabastecido"]);
+  </script>
+</body>
+</html>
