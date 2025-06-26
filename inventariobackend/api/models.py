@@ -1,16 +1,22 @@
 from django.db import models
 
 class DimFecha(models.Model):
-    fecha = models.DateField()
-    mes = models.IntegerField()
-    trimestre = models.IntegerField()
+    fecha = models.DateField(unique=True)
     anio = models.IntegerField()
+    mes = models.IntegerField()
+    dia = models.IntegerField()
+    trimestre = models.IntegerField()
+    
 
 class DimTienda(models.Model):
     nombre = models.CharField(max_length=100)
     ciudad = models.CharField(max_length=100)
     estado = models.CharField(max_length=100)
     tipo_tienda = models.CharField(max_length=50)
+    direccion = models.TextField(default="Sin dirección")
+
+    def __str__(self):
+        return self.nombre
 
 class DimProveedor(models.Model):
     nombre = models.CharField(max_length=100)
