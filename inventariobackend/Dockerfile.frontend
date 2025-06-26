@@ -1,4 +1,10 @@
-# Dockerfile.frontend
 FROM nginx:alpine
 
-COPY frontend /usr/share/nginx/html
+# Elimina la configuración por defecto
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copia tus archivos HTML/JS/CSS al directorio público de Nginx
+COPY frontend/ /usr/share/nginx/html/
+
+# Expón el puerto por el que Nginx sirve contenido
+EXPOSE 80

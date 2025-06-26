@@ -47,10 +47,11 @@
 
   <script>
     const fetchAndRender = (endpoint, tableId, keys) => {
-      fetch(`http://127.0.0.1:8000/api/analytics/${endpoint}/`)
+      fetch('http://localhost:8000/api/analytics/ventas-por-tienda')
         .then(res => res.json())
         .then(data => {
           const tbody = document.querySelector(`#${tableId} tbody`);
+          tbody.innerHTML = "";
           data.forEach(row => {
             const tr = document.createElement("tr");
             keys.forEach(k => {
