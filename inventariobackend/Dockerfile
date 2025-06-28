@@ -19,5 +19,5 @@ EXPOSE 8000
 # Ejecuta el servidor de desarrollo de Django
 RUN chmod +x entrypoint.ls
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.ls"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
