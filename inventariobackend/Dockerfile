@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir --timeout=120 -i https://pypi.org/simple/ -r requ
 EXPOSE 8000
 
 # Ejecuta el servidor de desarrollo de Django
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.ls
 
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
