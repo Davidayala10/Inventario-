@@ -13,14 +13,14 @@ COPY . .
 # Instala las dependencias con mayor timeout y mirror alternativo (para evitar errores de red)
 RUN pip install --no-cache-dir --timeout=120 -i https://pypi.org/simple/ -r requirements.txt
 
-# Da permisos de ejecución al archivo entrypoint.ls
-RUN chmod +x /app/entrypoint.ls
+# Da permisos de ejecución al archivo entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Expone el puerto 8000 para la aplicación Django
 EXPOSE 8000
 
 # Ejecuta el script de entrypoint
-ENTRYPOINT ["/app/entrypoint.ls"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Comando por defecto para ejecutar Django
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
