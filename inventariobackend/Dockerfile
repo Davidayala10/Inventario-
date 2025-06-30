@@ -16,7 +16,7 @@ COPY . .
 RUN pip install --no-cache-dir --timeout=120 -i https://pypi.org/simple/ -r requirements.txt
 
 # Da permisos de ejecución al archivo entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
 
 # Expone el puerto 8000 para la aplicación Django
 EXPOSE 8000
