@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Esperando a que PostgreSQL esté disponible..."
 until pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USER > /dev/null 2>&1; do
