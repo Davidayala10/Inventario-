@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y postgresql-client
 WORKDIR /app
 
 # Copia los archivos del proyecto al contenedor
+COPY entrypoint.sh /app/entrypoint.sh
+COPY requirements.txt /app/requirements.txt
 COPY . .
 
 # Instala las dependencias con mayor timeout y mirror alternativo (para evitar errores de red)
