@@ -8,15 +8,13 @@ RUN apt-get update && apt-get install -y postgresql-client
 WORKDIR /app
 
 # Copia los archivos del proyecto al contenedor
-COPY entrypoint.sh /app/entrypoint.sh
-COPY requirements.txt /app/requirements.txt
 COPY . .
 
 # Instala las dependencias con mayor timeout y mirror alternativo (para evitar errores de red)
 RUN pip install --no-cache-dir --timeout=120 -i https://pypi.org/simple/ -r requirements.txt
 
-# Da permisos de ejecución al archivo entrypoint.sh
-RUN sed -i 's/\r$//' /app/entrypoint.sh && chmod +x /app/entrypoint.sh
+# Da permisos de ejecución al archivo entrypoint.sh (cambiado de .ls a .sh)
+RUN chmod +x /app/entrypoint.sh
 
 # Expone el puerto 8000 para la aplicación Django
 EXPOSE 8000
